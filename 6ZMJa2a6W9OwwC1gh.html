@@ -1,0 +1,661 @@
+<html><head><base href="https://animals.encyclopedia/insects">
+<title>Insects - Animal Encyclopedia</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f8ff;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  .header {
+    background-color: #4a7c59;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+  }
+  .logo {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  .tagline {
+    font-style: italic;
+  }
+  .nav {
+    background-color: #78a58c;
+    padding: 10px 0;
+  }
+  .nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .nav li {
+    margin: 0 15px;
+  }
+  .nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    flex: 1;
+  }
+  .intro {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  .insect-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .insect-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+  }
+  .insect-card:hover {
+    transform: translateY(-5px);
+  }
+  .insect-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  .fun-fact {
+    background-color: #fff0f5;
+    border-left: 5px solid #ff69b4;
+    padding: 10px;
+    margin-top: 10px;
+    font-style: italic;
+  }
+  .audio-button {
+    background-color: #4a7c59;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+  }
+  .audio-button:hover {
+    background-color: #3d6b4a;
+  }
+  .back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #4a7c59;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+  }
+  .back-to-top:hover {
+    opacity: 1;
+  }
+  .insect-animation {
+    position: absolute;
+    font-size: 24px;
+    animation: fly 15s linear infinite;
+  }
+  @keyframes fly {
+    0% { top: 100%; left: -10%; }
+    25% { top: 50%; left: 25%; }
+    50% { top: 10%; left: 50%; }
+    75% { top: 50%; left: 75%; }
+    100% { top: 100%; left: 110%; }
+  }
+  .species-list {
+    background-color: #e6f3ff;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 30px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  .species-list h2 {
+    color: #4a7c59;
+    margin-bottom: 20px;
+  }
+  .species-list ul {
+    columns: 3;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  .species-list li {
+    margin-bottom: 10px;
+    padding: 8px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  .species-list li:hover {
+    background-color: #f0f8ff;
+  }
+  .species-list .view-more {
+    display: block;
+    width: 200px;
+    margin: 20px auto 0;
+    padding: 10px;
+    background-color: #4a7c59;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  .species-list .view-more:hover {
+    background-color: #3d6b4a;
+  }
+  .fun-facts-carousel {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 30px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  .fun-facts-carousel h2 {
+    color: #4a7c59;
+  }
+  #fun-fact-display {
+    font-style: italic;
+    margin: 20px 0;
+    min-height: 60px;
+  }
+  .interactive-quiz {
+    background-color: #f0e68c;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 30px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  .interactive-quiz h2 {
+    color: #4a7c59;
+  }
+  #quiz-question {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  #quiz-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  #quiz-options button {
+    padding: 10px;
+    background-color: #4a7c59;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  #quiz-options button:hover {
+    background-color: #3d6b4a;
+  }
+  #quiz-result {
+    margin-top: 20px;
+    font-weight: bold;
+  }
+  #quiz-timer {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  #next-question, #show-hint {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #4a7c59;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  #next-question:hover, #show-hint:hover {
+    background-color: #3d6b4a;
+  }
+  #quiz-hint {
+    margin-top: 10px;
+    font-style: italic;
+    color: #666;
+  }
+  .footer {
+    background-color: #4a7c59;
+    color: white;
+    padding: 40px 0;
+    margin-top: 50px;
+  }
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .footer-section {
+    flex: 1;
+    margin-right: 40px;
+  }
+  .footer-section:last-child {
+    margin-right: 0;
+  }
+  .footer h3 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    border-bottom: 2px solid #78a58c;
+    padding-bottom: 10px;
+  }
+  .footer ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  .footer li {
+    margin-bottom: 10px;
+  }
+  .footer a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  .footer a:hover {
+    color: #f0e68c;
+  }
+  .social-icons {
+    display: flex;
+    gap: 15px;
+  }
+  .social-icons a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    color: #4a7c59;
+    font-size: 20px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+  .social-icons a:hover {
+    transform: scale(1.1);
+    background-color: #f0e68c;
+  }
+  .footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #78a58c;
+  }
+  .nav-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+  .subscribe-form {
+    display: flex;
+    margin-top: 20px;
+  }
+  .subscribe-form input[type="email"] {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px 0 0 5px;
+  }
+  .subscribe-form button {
+    padding: 10px 20px;
+    background-color: #f0e68c;
+    color: #4a7c59;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .subscribe-form button:hover {
+    background-color: #e6dc82;
+  }
+  .view-more-insects {
+    display: block;
+    width: 200px;
+    margin: 20px auto 0;
+    padding: 10px;
+    background-color: #4a7c59;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  .view-more-insects:hover {
+    background-color: #3d6b4a;
+  }
+</style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">🐾 Animal Encyclopedia</div>
+    <div class="tagline">Explore the Wonders of the Animal Kingdom</div>
+  </header>
+  
+  <nav class="nav">
+    <ul>
+      <li><a href="/"><img src="https://example.com/home-icon.png" alt="Home" class="nav-icon">Home</a></li>
+      <li><a href="/mammals"><img src="https://example.com/mammal-icon.png" alt="Mammals" class="nav-icon">Mammals</a></li>
+      <li><a href="/birds"><img src="https://example.com/bird-icon.png" alt="Birds" class="nav-icon">Birds</a></li>
+      <li><a href="/reptiles"><img src="https://example.com/reptile-icon.png" alt="Reptiles" class="nav-icon">Reptiles</a></li>
+      <li><a href="/amphibians"><img src="https://example.com/amphibian-icon.png" alt="Amphibians" class="nav-icon">Amphibians</a></li>
+      <li><a href="/fish"><img src="https://example.com/fish-icon.png" alt="Fish" class="nav-icon">Fish</a></li>
+      <li><a href="/insects"><img src="https://example.com/insect-icon.png" alt="Insects" class="nav-icon">Insects</a></li>
+      <li><a href="/blog"><img src="https://example.com/blog-icon.png" alt="Blog" class="nav-icon">Blog</a></li>
+      <li><a href="/join-team"><img src="https://example.com/team-icon.png" alt="Join our Team" class="nav-icon">Join our Team</a></li>
+    </ul>
+  </nav>
+  
+  <div class="container">
+    <div class="intro">
+      <h1>Insects</h1>
+      <p>Insects are a class of invertebrates within the arthropod phylum. They are the largest group of animals on Earth, representing more than half of all known living organisms. Insects have a chitinous exoskeleton, a three-part body (head, thorax, and abdomen), three pairs of jointed legs, compound eyes, and one pair of antennae.</p>
+      <p>Key characteristics of insects include:</p>
+      <ul>
+        <li>Six legs</li>
+        <li>Three body segments</li>
+        <li>Exoskeleton</li>
+        <li>Many species can fly</li>
+        <li>Undergo metamorphosis</li>
+      </ul>
+    </div>
+    
+    <div class="insect-grid">
+      <div class="insect-card">
+        <img src="https://example.com/butterfly.jpg" alt="Colorful monarch butterfly on a flower" width="300" height="200">
+        <h2>Butterfly</h2>
+        <p>Known for their large, often brightly colored wings and fluttering flight.</p>
+        <div class="fun-fact">Fun fact: Butterflies taste with their feet!</div>
+        <button class="audio-button" onclick="playAudio('butterfly')">Listen to Butterfly</button>
+      </div>
+      
+      <div class="insect-card">
+        <img src="https://example.com/honeybee.jpg" alt="Honeybee collecting pollen from a flower" width="300" height="200">
+        <h2>Honeybee</h2>
+        <p>Social insects known for their production of honey and important role in pollination.</p>
+        <div class="fun-fact">Fun fact: A single bee colony can pollinate 300 million flowers each day!</div>
+        <button class="audio-button" onclick="playAudio('honeybee')">Listen to Honeybee</button>
+      </div>
+      
+      <div class="insect-card">
+        <img src="https://example.com/firefly.jpg" alt="Firefly glowing in the dark" width="300" height="200">
+        <h2>Firefly</h2>
+        <p>Also known as lightning bugs, famous for their ability to produce light.</p>
+        <div class="fun-fact">Fun fact: Firefly light is the most efficient light in the world!</div>
+        <button class="audio-button" onclick="playAudio('firefly')">Listen to Firefly</button>
+      </div>
+      
+      <div class="insect-card">
+        <img src="https://example.com/praying-mantis.jpg" alt="Praying mantis in hunting pose" width="300" height="200">
+        <h2>Praying Mantis</h2>
+        <p>Predatory insects known for their distinctive raptorial forelegs.</p>
+        <div class="fun-fact">Fun fact: A praying mantis can rotate its head 180 degrees!</div>
+        <button class="audio-button" onclick="playAudio('praying-mantis')">Listen to Praying Mantis</button>
+      </div>
+      
+      <div class="insect-card">
+        <img src="https://example.com/ladybug.jpg" alt="Red ladybug with black spots" width="300" height="200">
+        <h2>Ladybug</h2>
+        <p>Small, often brightly colored beetles known for eating aphids and other plant pests.</p>
+        <div class="fun-fact">Fun fact: A ladybug can eat up to 5,000 aphids in its lifetime!</div>
+        <button class="audio-button" onclick="playAudio('ladybug')">Listen to Ladybug</button>
+      </div>
+      
+      <div class="insect-card">
+        <img src="https://example.com/dragonfly.jpg" alt="Dragonfly perched on a reed" width="300" height="200">
+        <h2>Dragonfly</h2>
+        <p>Predatory insects characterized by long bodies, large multifaceted eyes, and two pairs of strong wings.</p>
+        <div class="fun-fact">Fun fact: Dragonflies have been around for 300 million years!</div>
+        <button class="audio-button" onclick="playAudio('dragonfly')">Listen to Dragonfly</button>
+      </div>
+    </div>
+    
+    <a href="/insects/more" class="view-more-insects">View More Insects</a>
+    
+    <div class="species-list">
+      <h2>Common Insect Species</h2>
+      <ul>
+        <li>Monarch Butterfly (Danaus plexippus)</li>
+        <li>European Honey Bee (Apis mellifera)</li>
+        <li>Common Eastern Firefly (Photinus pyralis)</li>
+        <li>European Mantis (Mantis religiosa)</li>
+        <li>Seven-spotted Ladybug (Coccinella septempunctata)</li>
+        <li>Blue-eyed Darner Dragonfly (Rhionaeschna multicolor)</li>
+        <li>Atlas Moth (Attacus atlas)</li>
+        <li>Goliath Beetle (Goliathus goliatus)</li>
+        <li>Giant Weta (Deinacrida heteracantha)</li>
+        <li>Hercules Beetle (Dynastes hercules)</li>
+        <li>Leaf-cutter Ant (Atta cephalotes)</li>
+        <li>Emperor Dragonfly (Anax imperator)</li>
+        <li>Luna Moth (Actias luna)</li>
+        <li>Jewel Beetle (Chrysochroa fulgidissima)</li>
+        <li>Orchid Mantis (Hymenopus coronatus)</li>
+      </ul>
+      <a href="/insects/species" class="view-more">View More Species</a>
+    </div>
+    
+    <div class="fun-facts-carousel">
+      <h2>Insect Fun Facts Carousel</h2>
+      <div id="fun-fact-display">Click the button to start the fun fact carousel!</div>
+    </div>
+    
+    <div class="interactive-quiz">
+      <h2>Insect Quiz</h2>
+      <div id="quiz-timer">Time remaining: 30 seconds</div>
+      <div id="quiz-question"></div>
+      <div id="quiz-options"></div>
+      <div id="quiz-result"></div>
+      <div id="quiz-hint"></div>
+      <button id="show-hint" onclick="showHint()">Show Hint</button>
+      <button id="next-question" onclick="loadQuestion()">Next Question</button>
+    </div>
+  </div>
+  
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>About Us</h3>
+        <p>Animal Encyclopedia is dedicated to educating people about the fascinating world of animals. Our mission is to promote understanding and conservation of Earth's biodiversity.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Connect With Us</h3>
+        <div class="social-icons">
+          <a href="https://facebook.com/animalencyclopedia" title="Facebook">f</a>
+          <a href="https://twitter.com/animalencyc" title="Twitter">t</a>
+          <a href="https://instagram.com/animalencyclopedia" title="Instagram">i</a>
+          <a href="https://youtube.com/animalencyclop" title="YouTube">▶</a>
+        </div>
+        <h3>Subscribe to our community email list</h3>
+        <form class="subscribe-form">
+          <input type="email" placeholder="Enter your email" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2023 Animal Encyclopedia. All rights reserved.
+    </div>
+  </footer>
+
+  <a href="#" class="back-to-top">↑ Back to Top</a>
+
+  <div class="insect-animation">🦋</div>
+  <div class="insect-animation" style="animation-delay: 5s;">🐝</div>
+  <div class="insect-animation" style="animation-delay: 10s;">🐞</div>
+
+<script>
+const funFacts = [
+  "The shortest living insect is the mayfly, which lives for only 24 hours.",
+  "Insects make up about 80% of the world's species.",
+  "Some crickets can tell you the temperature outside by how fast they chirp.",
+  "A colony of termites can eat through 100 pounds of wood in a year.",
+  "The average garden spider can spin seven different kinds of silk.",
+  "Bees have to collect nectar from 2 million flowers to make 1 pound of honey.",
+  "A butterfly's taste sensors are located in its feet.",
+  "Some male moths can smell a female moth from up to 7 miles away.",
+  "Houseflies hum in the key of F.",
+  "Ants can lift 20 times their own body weight."
+];
+
+let currentFactIndex = 0;
+
+function showNextFact() {
+  const factDisplay = document.getElementById('fun-fact-display');
+  factDisplay.textContent = funFacts[currentFactIndex];
+  currentFactIndex = (currentFactIndex + 1) % funFacts.length;
+}
+
+setInterval(showNextFact, 15000);
+showNextFact(); // Show the first fact immediately
+
+const quizQuestions = [
+  {
+    question: "Which insect is known for its ability to produce light?",
+    options: ["Butterfly", "Firefly", "Ant", "Beetle"],
+    answer: "Firefly",
+    hint: "This insect is often seen glowing at night."
+  },
+  {
+    question: "How many legs do insects have?",
+    options: ["Four", "Six", "Eight", "Ten"],
+    answer: "Six",
+    hint: "It's an even number between four and eight."
+  },
+  {
+    question: "Which of these is NOT a stage in complete metamorphosis?",
+    options: ["Egg", "Larva", "Nymph", "Pupa"],
+    answer: "Nymph",
+    hint: "This stage is associated with incomplete metamorphosis."
+  },
+  {
+    question: "Which insect is known as the 'king of butterflies'?",
+    options: ["Swallowtail", "Monarch", "Morpho", "Painted Lady"],
+    answer: "Monarch",
+    hint: "This butterfly is known for its orange and black coloration."
+  }
+];
+
+let currentQuestion;
+let timer;
+
+function loadQuestion() {
+  const questionElem = document.getElementById('quiz-question');
+  const optionsElem = document.getElementById('quiz-options');
+  const resultElem = document.getElementById('quiz-result');
+  const timerElem = document.getElementById('quiz-timer');
+  const hintElem = document.getElementById('quiz-hint');
+  const nextButton = document.getElementById('next-question');
+  const hintButton = document.getElementById('show-hint');
+  
+  clearInterval(timer);
+  resultElem.textContent = '';
+  optionsElem.innerHTML = '';
+  hintElem.textContent = '';
+  nextButton.style.display = 'none';
+  hintButton.style.display = 'inline-block';
+  
+  currentQuestion = quizQuestions[Math.floor(Math.random() * quizQuestions.length)];
+  
+  questionElem.textContent = currentQuestion.question;
+  
+  currentQuestion.options.forEach(option => {
+    const button = document.createElement('button');
+    button.textContent = option;
+    button.onclick = () => checkAnswer(option);
+    optionsElem.appendChild(button);
+  });
+
+  let timeLeft = 30;
+  timerElem.textContent = `Time remaining: ${timeLeft} seconds`;
+
+  timer = setInterval(() => {
+    timeLeft--;
+    timerElem.textContent = `Time remaining: ${timeLeft} seconds`;
+    if (timeLeft === 0) {
+      clearInterval(timer);
+      showAnswer();
+    }
+  }, 1000);
+}
+
+function checkAnswer(selected) {
+  clearInterval(timer);
+  const resultElem = document.getElementById('quiz-result');
+  const nextButton = document.getElementById('next-question');
+  const hintButton = document.getElementById('show-hint');
+  if (selected === currentQuestion.answer) {
+    resultElem.textContent = "Correct! Well done!";
+    resultElem.style.color = "green";
+  } else {
+    resultElem.textContent = `Sorry, the correct answer was ${currentQuestion.answer}.`;
+    resultElem.style.color = "red";
+  }
+  nextButton.style.display = 'inline-block';
+  hintButton.style.display = 'none';
+}
+
+function showAnswer() {
+  const resultElem = document.getElementById('quiz-result');
+  const nextButton = document.getElementById('next-question');
+  const hintButton = document.getElementById('show-hint');
+  resultElem.textContent = `Time's up! The correct answer was ${currentQuestion.answer}.`;
+  resultElem.style.color = "blue";
+  nextButton.style.display = 'inline-block';
+  hintButton.style.display = 'none';
+}
+
+function showHint() {
+  const hintElem = document.getElementById('quiz-hint');
+  hintElem.textContent = `Hint: ${currentQuestion.hint}`;
+}
+
+function playAudio(insect) {
+  // In a real implementation, this would play an actual audio file
+  console.log(`Playing ${insect} sound`);
+  alert(`Imagine hearing the sound of a ${insect} right now!`);
+}
+
+// Initialize the quiz and fun fact carousel
+loadQuestion();
+showNextFact();
+</script>
+
+</body></html>
